@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #!/usr/bin/with-contenv sh
 
 
@@ -18,11 +17,3 @@ EOL
     cd /var/www/html
     exec npm run dev
 fi
-||||||| (empty tree)
-=======
-#!/usr/bin/with-contenv sh
-
-su www-data
-cd /var/www/html
-exec npm run dev 
->>>>>>> 1ba5152 ( init)
