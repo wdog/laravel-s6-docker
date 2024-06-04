@@ -1,0 +1,37 @@
+services:
+    app:
+      container_name: app
+      build:
+        context: .
+        dockerfile: .docker/Dockerfile
+        args:
+          - VITE_ENABLED=true
+          - XDEBUG_ENABLED=true
+          - UID=1000
+          - GID=1000
+          - APP_ENV=local
+      environment:
+          - VITE_ENABLED=true
+          - XDEBUG_ENABLED=false
+          - APP_ENV=local
+      volumes:
+        - ./src:/var/www/html
+      ports:
+        - 443:443
+        - 80:80
+        - 5173:5173
+      depends_on:
+        - db
+
+    db:
+      container_name: db
+      image: mysql:8
+      volumes:
+        - ./mysql/data:/var/lib/mysql
+      ports:
+        - 3306:3306
+      environment:
+        - MYSQL_DATABASE=bill2
+        - MYSQL_USER=bill2
+        - MYSQL_PASSWORD=bill2
+        - MYSQL_ROOT_PASSWORD=bill2

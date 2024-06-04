@@ -1,0 +1,26 @@
+<<<<<<< HEAD
+#!/usr/bin/with-contenv sh
+
+# Enable queue for production
+su www-data -s /bin/sh
+
+cat <<EOF
+ ██████╗ ██╗   ██╗███████╗██╗   ██╗███████╗
+██╔═══██╗██║   ██║██╔════╝██║   ██║██╔════╝
+██║   ██║██║   ██║█████╗  ██║   ██║█████╗  
+██║▄▄ ██║██║   ██║██╔══╝  ██║   ██║██╔══╝  
+╚██████╔╝╚██████╔╝███████╗╚██████╔╝███████╗
+ ╚══▀▀═╝  ╚═════╝ ╚══════╝ ╚═════╝ ╚══════╝
+EOF
+
+
+sleep 5
+exec php /var/www/html/artisan queue:work --tries=3
+||||||| (empty tree)
+=======
+#!/usr/bin/with-contenv sh
+
+# Enable opcache for production
+su www-data
+exec php /var/www/html/artisan queue:work --tries=3
+>>>>>>> 1ba5152 ( init)

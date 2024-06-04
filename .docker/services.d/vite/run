@@ -1,0 +1,28 @@
+<<<<<<< HEAD
+#!/usr/bin/with-contenv sh
+
+
+# enable vite for dev
+if [ "$VITE_ENABLED" == "true" ]; then
+    # Enable queue for production
+    su www-data -s /bin/sh
+
+cat <<EOL
+██╗   ██╗██╗████████╗███████╗
+██║   ██║██║╚══██╔══╝██╔════╝
+██║   ██║██║   ██║   █████╗  
+╚██╗ ██╔╝██║   ██║   ██╔══╝  
+ ╚████╔╝ ██║   ██║   ███████╗
+  ╚═══╝  ╚═╝   ╚═╝   ╚══════╝
+EOL
+    cd /var/www/html
+    exec npm run dev
+fi
+||||||| (empty tree)
+=======
+#!/usr/bin/with-contenv sh
+
+su www-data
+cd /var/www/html
+exec npm run dev 
+>>>>>>> 1ba5152 ( init)
