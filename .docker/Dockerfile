@@ -11,12 +11,13 @@ RUN apk update && apk add \
     # see https://github.com/docker-library/php/issues/880
     oniguruma-dev \
     # needed for gd
-    libpng-dev libjpeg-turbo-dev \
+    libpng-dev libjpeg-turbo-dev icu-dev \
     # needed for xdebug
     $PHPIZE_DEPS \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     # Installing common Laravel dependencies
-    && docker-php-ext-install mbstring pdo_mysql gd \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install mbstring pdo_mysql gd bcmath intl \
     opcache \
     && mkdir -p /home/www-data/.composer/cache \
     && chown -R www-data:www-data /home/www-data/ /var/www/html
