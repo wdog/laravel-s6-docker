@@ -73,10 +73,12 @@ RUN if [ "$APP_ENV" == "production" ]; then \
 ADD .docker/healthcheck.ini /usr/local/etc/php/healthcheck.ini
 
 ## DEV
-ARG VITE_ENABLED=false
 RUN if [ "$VITE_ENABLED" = "true" ]; then \
     apk add nodejs npm; \
     fi
+
+## TEST
+RUN apk add nodejs npm;
 
 RUN rm -rf /var/cache/apk/* && \
     rm -rf /tmp/*

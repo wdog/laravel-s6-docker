@@ -1,19 +1,20 @@
 services:
     app:
+      env_file: "./src/.env"
       container_name: app
       build:
         context: .
         dockerfile: .docker/Dockerfile
         args:
-          - VITE_ENABLED=true
-          - XDEBUG_ENABLED=true
+          - VITE_ENABLED=${VITE_ENABLED}
+          - XDEBUG_ENABLED=${XDEBUG_ENABLED}
           - UID=1000
           - GID=1000
-          - APP_ENV=local
+          - APP_ENV=${APP_ENV}
       environment:
-          - VITE_ENABLED=true
-          - XDEBUG_ENABLED=false
-          - APP_ENV=local
+          - VITE_ENABLED=${VITE_ENABLED}
+          - XDEBUG_ENABLED=${XDEBUG_ENABLED}
+          - APP_ENV=${APP_ENV}
       restart: unless-stopped
       volumes:
         - ./src:/var/www/html
