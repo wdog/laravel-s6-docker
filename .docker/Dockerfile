@@ -61,6 +61,7 @@ RUN apk add shadow && usermod -u $UID www-data && groupmod -g $GID www-data
 # This is enabled at runtime
 ADD .docker/opcache.ini          /usr/local/etc/php/opcache.ini
 ADD .docker/opcache_disabled.ini /usr/local/etc/php/opcache_disabled.ini
+ADD .docker/php_extra.ini        /usr/local/etc/php/conf.d/php_extra.ini
 
 ARG APP_ENV=local
 RUN if [ "$APP_ENV" == "production" ]; then \
