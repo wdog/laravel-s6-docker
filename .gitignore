@@ -2,3 +2,4 @@ src/
 mail/
 mysql/data
 .vscode/
+.env
