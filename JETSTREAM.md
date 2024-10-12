@@ -62,4 +62,11 @@ set_permissions
 sudo sed -i "14i server: { host: '0.0.0.0', hmr: { host: 'localhost' } }," vite.config.js
 
 docker-compose exec app php artisan optimize:clear
+docker-compose exec  -u 1000 app php artisan vendor:publish --tag="livewire:config"
+
+# from:
+# 'layout' => 'components.layouts.app',
+# to:
+# 'layout' => 'layouts.app',
+
 $composer dump -o
