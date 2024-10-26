@@ -10,7 +10,6 @@ DB::listen( fn($q) => dump($q->sql, $q->bindings))
 ```php
 DB::enableQueryLog();
 DB::getQueryLog();
-
 ```
 
 
@@ -41,32 +40,33 @@ tailwindcss
 darkMode: 'class', // or 'media' if you want to use the OS setting
 ```
 
+app.blade.php
+
+```html
+<body x-data="themeSwitcher()" :class="{ 'dark': switchOn }">
+```
 
 navigation.blade.php
 
-```php
+```html
+<div x-data="window.themeSwitcher()" x-init="switchTheme()" @keydown.window.tab="switchOn = false"
+     class="flex items-center justify-center space-x-2">
+    <input id="thisId" type="checkbox" name="switch" class="hidden" :checked="switchOn">
 
+    <button
+            x-ref="switchButton"
+            type="button"
+            @click="switchOn = ! switchOn; switchTheme()"
+            :class="switchOn ? 'bg-blue-600' : 'bg-neutral-200'"
+            class="relative ml-4 inline-flex h-6 w-10 rounded-full py-0.5 focus:outline-none">
+        <span :class="switchOn ? 'translate-x-[18px]' : 'translate-x-0.5'"
+              class="w-5 h-5 duration-200 ease-in-out bg-white rounded-full shadow-md"></span>
+    </button>
 
-                <div x-data="window.themeSwitcher()" x-init="switchTheme()" @keydown.window.tab="switchOn = false"
-                     class="flex items-center justify-center space-x-2">
-                    <input id="thisId" type="checkbox" name="switch" class="hidden" :checked="switchOn">
-
-                    <button
-                            x-ref="switchButton"
-                            type="button"
-                            @click="switchOn = ! switchOn; switchTheme()"
-                            :class="switchOn ? 'bg-blue-600' : 'bg-neutral-200'"
-                            class="relative ml-4 inline-flex h-6 w-10 rounded-full py-0.5 focus:outline-none">
-                        <span :class="switchOn ? 'translate-x-[18px]' : 'translate-x-0.5'"
-                              class="w-5 h-5 duration-200 ease-in-out bg-white rounded-full shadow-md"></span>
-                    </button>
-
-                    <label @click="$refs.switchButton.click(); $refs.switchButton.focus()" :id="$id('switch')"
-                           :class="{ 'text-blue-600': switchOn, 'text-gray-400': !switchOn }"
-                           class="text-sm select-none">
-                        Dark Mode
-                    </label>
-                </div>
-
-
+    <label @click="$refs.switchButton.click(); $refs.switchButton.focus()" :id="$id('switch')"
+           :class="{ 'text-blue-600': switchOn, 'text-gray-400': !switchOn }"
+           class="text-sm select-none">
+        Dark Mode
+    </label>
+</div>
 ```
