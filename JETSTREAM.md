@@ -1,3 +1,4 @@
+```bash
 #!/bin/bash
 
 set_permissions () {
@@ -77,3 +78,4 @@ docker-compose exec -u 1000 app php artisan optimize:clear
 $composer dump -o
 
 docker-compose exec app php artisan tin --execute "User::factory()->create(['email'=>'admin@example.com'])"
+```
