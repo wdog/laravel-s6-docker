@@ -45,7 +45,7 @@ sudo sed -i "s/# DB_PASSWORD=.*/DB_PASSWORD=laravel/" $ENV_FILE
 sudo echo "VITE_ENABLED=true" >> $ENV_FILE
 sudo echo "XDEBUG_ENABLED=false" >> $ENV_FILE
 
-$composer require laravel/jetstream
+$composer require filament/filament --ignore-platform-req=ext-intl
 
 
 cp $ENV_FILE ..
@@ -60,14 +60,16 @@ set_permissions
 
 docker-compose up -d
 
-docker-compose exec app php artisan jetstream:install livewire --dark -n
+
 set_permissions
 
-sudo sed -i "14i server: { host: '0.0.0.0', hmr: { host: 'localhost' } }," vite.config.js
+sudo sed -i "11i server: { host: '0.0.0.0', hmr: { host: 'localhost' } }," vite.config.js
 
-docker-compose exec app php artisan optimize:clear
-docker-compose exec  -u 1000 app php artisan vendor:publish --tag="livewire:config"
+docker-compose exec -u 1000 app php artisan migrate
+docker-compose exec -u 1000 app php artisan filament:install --panels -n
 docker-compose exec -u 1000 app php artisan optimize:clear
+docker-compose exec -u 1000 app php artisan vendor:publish --tag="livewire:config"
+set_permissions
 
 # from:
 # 'layout' => 'components.layouts.app',
