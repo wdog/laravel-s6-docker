@@ -66,10 +66,10 @@ set_permissions
 
 sudo sed -i "11i server: { host: '0.0.0.0', hmr: { host: 'localhost' } }," vite.config.js
 
-docker-compose exec -u 1000 app php artisan migrate
-docker-compose exec -u 1000 app php artisan filament:install --panels -n
-docker-compose exec -u 1000 app php artisan optimize:clear
-docker-compose exec -u 1000 app php artisan vendor:publish --tag="livewire:config"
+docker-compose exec -u $CUID app php artisan migrate
+docker-compose exec -u $CUID app php artisan filament:install --panels -n
+docker-compose exec -u $CUID app php artisan optimize:clear
+docker-compose exec -u $CUID app php artisan vendor:publish --tag="livewire:config"
 set_permissions
 
 # from:
