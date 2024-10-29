@@ -1,3 +1,4 @@
+```bash
 #!/bin/bash
 
 set_permissions () {
@@ -70,3 +71,4 @@ docker-compose exec  -u 1000 app php artisan vendor:publish --tag="livewire:conf
 # 'layout' => 'layouts.app',
 
 $composer dump -o
+```
