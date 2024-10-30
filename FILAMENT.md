@@ -81,3 +81,39 @@ $composer dump -o
 
 docker-compose exec app php artisan tin --execute "User::factory()->create(['email'=>'admin@example.com'])"
 ```
+
+## VITE RELOAD PAGE
+
+```javascript
+import { defineConfig } from "vite";
+import laravel, { refreshPaths } from "laravel-vite-plugin";
+
+export default defineConfig({
+  plugins: [
+    laravel({
+      input: ["resources/css/app.css", "resources/js/app.js"],
+      refresh: [
+        ...refreshPaths,
+        "app/Http/Livewire/**/*", // Custom Livewire components
+        "app/Filament/**/*", // Filament Resources
+        "app/Providers/Filament/**",
+      ],
+    }),
+  ],
+  server: {
+    hmr: {
+      host: "localhost",
+    },
+    host: "0.0.0.0",
+  },
+});
+```
+
+```php
+$panel
+    ->sidebarWidth('16rem')
+    ->maxContentWidth(MaxWidth::Full)
+    ->renderHook('panels::body.end', fn (): string => 
+        Blade::render("@vite('resources/js/app.js')")
+        )
+```
