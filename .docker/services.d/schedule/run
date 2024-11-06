@@ -13,4 +13,5 @@ EOF
 
 
 sleep 5
-exec php /var/www/html/artisan schedule:work
+cd /var/www/html
+exec php artisan schedule:work
