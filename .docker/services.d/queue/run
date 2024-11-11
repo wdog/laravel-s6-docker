@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv sh
 
 # Enable queue for production
-su www-data -s /bin/sh
+#su www-data -s /bin/sh
 
 cat <<EOF
 ┌───────────────┐
@@ -13,4 +13,5 @@ EOF
 
 
 sleep 5
-exec php /var/www/html/artisan queue:work --tries=3
+cd /var/www/html
+exec s6-setuidgid www-data php artisan queue:work --tries=3

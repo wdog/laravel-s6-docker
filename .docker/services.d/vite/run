@@ -4,7 +4,7 @@
 # enable vite for dev
 if [ "$VITE_ENABLED" == "true" ]; then
     # Enable queue for production
-    su www-data -s /bin/sh
+    # su www-data -s /bin/sh
 
 cat <<EOL
 ┌──────────┐
@@ -13,6 +13,7 @@ cat <<EOL
 │┗┛ ╹ ╹ ┗━╸│
 └──────────┘
 EOL
+
     cd /var/www/html
-    exec npm run dev
+    exec s6-setuidgid www-data npm run dev
 fi
