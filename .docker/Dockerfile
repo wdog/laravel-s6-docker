@@ -22,6 +22,9 @@ RUN apk update && apk add \
     && mkdir -p /home/www-data/.composer/cache \
     && chown -R www-data:www-data /home/www-data/ /var/www/html
 
+RUN docker-php-ext-configure pcntl --enable-pcntl \
+  && docker-php-ext-install pcntl;
+
 RUN apk add icu-dev libzip-dev && docker-php-ext-install zip bz2 intl
 # ------------------------ xdebug ------------------------
 ARG XDEBUG_ENABLE=false
