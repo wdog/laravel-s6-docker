@@ -12,6 +12,8 @@ RUN apk update && apk add \
     oniguruma-dev \
     # needed for gd
     libpng-dev libjpeg-turbo-dev icu-dev \
+    # number formatter locales
+    icu-data-full \
     # needed for xdebug
     $PHPIZE_DEPS \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
