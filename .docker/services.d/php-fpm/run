@@ -7,15 +7,6 @@ else
   echo "PHP-FPM's opcache is NOT enabled";
 fi
 
-# Enable xdebug if XDEBUG_ENABLE=true
-if [ "$XDEBUG_ENABLE" == "true" ]; then
-  if [ -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini.disabled ]; then
-    echo "Enabling PHP-FPM's xdebug";
-    mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini.disabled /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-  else
-    echo "Xdebug is not installed on the container";
-  fi
-fi
 
 su www-data -s /bin/sh
 
