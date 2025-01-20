@@ -2,14 +2,12 @@
 
 # Enable opcache for production
 if [ "$APP_ENV" == "production" ]; then
-  echo "Enabling PHP-FPM's opcache for production";
+  echo "PRODUCTION"
 else
-  echo "PHP-FPM's opcache is NOT enabled";
+  echo "DEV"
 fi
 
-
 su www-data -s /bin/sh
-
 
 cat <<EOL
 ┌─────────────────────┐
@@ -20,4 +18,3 @@ cat <<EOL
 EOL
 
 exec /usr/local/sbin/php-fpm --nodaemonize
-

@@ -4,6 +4,7 @@ services:
       container_name: app
       build:
         context: .
+        target: ${APP_ENV}
         dockerfile: .docker/Dockerfile
         args:
           - VITE_ENABLED=${VITE_ENABLED}
