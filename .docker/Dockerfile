@@ -1,4 +1,4 @@
-FROM php:8.3.0-fpm-alpine3.19 AS base
+FROM php:8.3.16-fpm-alpine3.21 AS base
 
 WORKDIR /var/www/html
 
