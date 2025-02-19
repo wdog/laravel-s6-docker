@@ -79,7 +79,7 @@ set_permissions
 
 $composer dump -o
 
-docker-compose exec app php artisan tin --execute "User::factory()->create(['email'=>'admin@example.com'])"
+docker-compose exec app php artisan tin --execute "User::factory()->create(['email'=>'admin@example.com','password'=> 'password'])"
 ```
 
 ## VITE RELOAD PAGE
@@ -113,7 +113,8 @@ export default defineConfig({
 $panel
     ->sidebarWidth('16rem')
     ->maxContentWidth(MaxWidth::Full)
-    ->renderHook('panels::body.end', fn (): string => 
+    # HOT RELOAD
+    ->renderHook('panels::body.end', fn (): string =>
         Blade::render("@vite('resources/js/app.js')")
         )
 ```
