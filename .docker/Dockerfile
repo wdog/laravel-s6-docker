@@ -19,6 +19,7 @@ RUN apk add --no-cache --update \
     openssl \
     oniguruma-dev \
     gpg curl \
+    sqlite-dev \
     libpng-dev libjpeg-turbo-dev icu-dev \
     icu-data-full libzip-dev && \
     docker-php-ext-install pcntl mbstring gd bcmath zip bz2 intl && \
