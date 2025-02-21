@@ -54,7 +54,8 @@ RUN cd /tmp && \
     pecl install sqlsrv pdo_sqlsrv && \
     docker-php-ext-enable sqlsrv pdo_sqlsrv && \
     apk del .phpize-deps && \
-    rm /tmp/*.apk && \
+    rm -rf /tmp/*.apk && \
+    rm -rf /var/cache/apk/* && \
     cd -
 
 
@@ -73,6 +74,7 @@ RUN apk add nodejs npm;
 ADD .docker/php_extra.ini        /usr/local/etc/php/conf.d/php_extra.ini
 ADD .docker/healthcheck.ini /usr/local/etc/php/healthcheck.ini
 
+RUN rm -rf /var/cache/apk/*
 EXPOSE 80 443 5173
 
 # --------------------------
@@ -112,5 +114,7 @@ RUN docker-php-ext-install opcache
 
 ADD .docker/opcache.ini /usr/local/etc/php/opcache.ini
 # ------- start fpm/nginx ------------------------
+
+RUN apk del .build-deps && rm -rf /var/cache/apk/*
 ENTRYPOINT ["/init"]
 CMD []
