@@ -7,14 +7,14 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 RUN apk add nginx s6-overlay
 
 # Installa le dipendenze comuni
-RUN apk add $PHPIZE_DEPS \
-    && docker-php-ext-install pdo_mysql
-
 
 # number formatter locales icu-data-full
 # oniguma see https://github.com/docker-library/php/issues/880
 
-RUN apk add --no-cache --update \
+RUN apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS && \
+    docker-php-ext-install pdo_mysql && \
+    apk add --no-cache --update \
+    icu-data-full \
     shadow \
     openssl \
     oniguruma-dev \
@@ -26,8 +26,10 @@ RUN apk add --no-cache --update \
     docker-php-ext-configure intl && \
     docker-php-ext-configure pcntl --enable-pcntl && \
     mkdir -p /home/www-data/.composer/cache && \
+    apk del .phpize-deps && \
+    rm -rf /tmp/*.apk && \
+    rm -rf /var/cache/apk/* && \
     chown -R www-data:www-data /home/www-data/ /var/www/html ;
-
 
 RUN openssl req -x509 -nodes -days 365 \
     -subj  "/C=IT/ST=QC/O=dark Empire/CN=localhost" \
@@ -86,7 +88,7 @@ FROM base AS local
 # ARG XDEBUG_ENABLED=false
 
 RUN pecl channel-update pecl.php.net
-RUN apk add --update linux-headers
+RUN apk add --update linux-headers && rm -rf /var/cache/apk/*
 # ! TODO FIX
 # RUN pecl install -o -f xdebug-3.4.0 && docker-php-ext-enable xdebug
 
