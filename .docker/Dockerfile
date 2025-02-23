@@ -63,8 +63,8 @@ RUN cd /tmp && \
 
 
 # change uid to current user uid ( id -u ) (id -g)
-ARG UID=1000
-ARG GID=1000
+ARG UID=$UID
+ARG GID=$GID
 RUN usermod -u $UID www-data && \
     groupmod -g $GID www-data ;
 
